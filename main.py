@@ -1,3 +1,4 @@
+import sys
 from stats import get_num_words, count_character, sort_dictionnary
 def get_boot_text(filepath):
     with open(filepath) as f:
@@ -18,12 +19,15 @@ def print_report(filepath, num_words, sorted_dictionnary):
 
 def main():
     filepath = "./books/frankenstein.txt"
-    content = get_boot_text(filepath)
-    num_words = get_num_words(content)
-    character_count = count_character(content)
-    sorted_dictionnary = sort_dictionnary(character_count)
-    print_report(filepath, num_words, sorted_dictionnary)
-
-
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+    else:
+        filepath = sys.argv[1]
+        content = get_boot_text(filepath)
+        num_words = get_num_words(content)
+        character_count = count_character(content)
+        sorted_dictionnary = sort_dictionnary(character_count)
+        print_report(filepath, num_words, sorted_dictionnary)
 
 main()
